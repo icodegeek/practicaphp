@@ -1,9 +1,13 @@
 <?php 
 
+	require_once '../location/url.php';
 
-	 unset($_SESSION['user']);
+	session_start();
 
-	 session_destroy();
+	unset($_SESSION['user']);
 
-	 header('Location: ../home');
-	 exit();
+	session_destroy();
+
+	header('Location: ' . $home);
+	 
+	exit();

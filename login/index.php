@@ -1,5 +1,6 @@
 <?php 
 
+require_once '../location/url.php';
 require_once '../db/connectdb.php';
 
 session_start();
@@ -43,7 +44,7 @@ if (isset($_GET['login'])) {
 		if (strcmp($alumno['nombre'], $nombre) == 0 && strcmp($alumno['password'], $password) == 0) {
 			
 			$_SESSION['user'] = $nombre;
-			header('Location: ../home/index.php');
+			header('Location: ' . $home);
 			exit();
 		}
 	}

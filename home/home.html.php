@@ -1,4 +1,3 @@
-<?php print_r($_SESSION); ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,17 +6,20 @@
 </head>
 <body>
 	<h1>Página de prácticas</h1>
-	<a href="login">Login</a>
 	<?php if (isset($_SESSION['user'])): ?> 
-		<a href="../upload">Subir práctica</a> - 
-		<a href="../logout">Salir</a>
+		<a href="<?=$home.'upload'?>">Subir práctica</a> - 
+		<a href="<?=$home.'logout'?>">Salir</a>
+	<?php else: ?>
+		<a href="login">Login</a>
 	<?php endif; ?>
-	<ul>
-		<li>#1 - ejercicio.docx</li>
-		<li>#2 - practica.html</li>
-		<li>#3 - tarea.pdf</li>
-		<li>#4 - trabajo.jgp</li>
-		<li>#5 - practica.odt</li>
-	</ul>
+	<?php if(!empty($archivos)): ?>
+		<ul>
+			<?php foreach ($archivos as $archivo): ?>
+				<li>#<?=$archivo['id']?> - <?=$archivo['titulo']?></li>
+			<?php endforeach; ?>
+		</ul>
+	<?php else: ?>
+		<h2>No existe ningún archivo subido.</h2>
+	<?php endif; ?>
 </body>
 </html>

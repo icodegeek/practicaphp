@@ -1,24 +1,37 @@
 <?php
 
+require_once '../location/url.php';
 require_once '../db/connectdb.php';
 
 if (isset($_GET['upload'])) {
 	
 	$name = $_POST['name'];
-	$practica = $_POST['practica'];
+	$errores = [];
 
-	$file_name = $_FILES['imagen']['name'];
-	$file_size = $_FILES['imagen']['size'];
-	$file_tmp = $_FILES['imagen']['tmp_name'];
-	$file_type = $_FILES['imagen']['type'];
-	$file_error = $_FILES['imagen']['error'];
+	$file_name = $_FILES['practica']['name'];
+	$file_size = $_FILES['practica']['size'];
+	$file_tmp = $_FILES['practica']['tmp_name'];
+	$file_type = $_FILES['practica']['type'];
+	$file_error = $_FILES['practica']['error'];
 
-	try {
+	if ($name == "") {
+		
+		$errores['name']['vacio'] = true;
+	}
+
+	if ($_FILES['practica']['error'] > 0) {
+		
+		$errores['practica']['nulo'] = true;
+	}
+
+	if (empty($errores)) {
+		
+		try {
 		
 		$sql = "INSERT INTO archivos(titulo) VALUES (:titulo)";
 
 		$ps = $pdo->prepare($sql);
-		$ps->bindValue(':titulo', $titulo);
+		$ps->bindValue(':titulo', $name);
 		$ps->execute();
 
 	} catch (PDOException $e) {
@@ -27,8 +40,11 @@ if (isset($_GET['upload'])) {
 	}
 
 	move_uploaded_file($file_tmp, $base_images_path. $file_name);
+	header('Location: ' . $home);
+	
+	}
+	
 }
-
 
 
 require_once 'upload.html.php';

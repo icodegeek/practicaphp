@@ -7,14 +7,20 @@
 <body>
 	<h1>Subir Práctica</h1>
 	
-	<form action="?upload" method="post">
+	<form action="?upload" method="post" enctype="multipart/form-data">
 		<div>
 		<label for="name">Nombre:</label>
-		<input type="text" name="name">
+		<input type="text" name="name" value="<?php if (isset($_POST['name'])) echo $_POST['name'];?>">
+		<?php if (isset($errores['name']['vacio'])): ?>
+			<p style="color: red;">Debes introducir el nombre del archivo.</p>
+		<?php endif; ?>
 		</div>
 		<div>
 		<label for="practica">Archivo:</label>
 		<input type="file" name="practica">
+		<?php if(isset($errores['practica']['nulo'])): ?>
+			<p style="color:red;">Debes subir un archivo.</p>
+		<?php endif; ?>
 		</div>
 		<div>
 		<input type="submit" value="Subir Archivo">

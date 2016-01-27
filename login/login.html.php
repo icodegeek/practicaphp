@@ -1,3 +1,15 @@
+<?php  
+
+require_once '../location/url.php';
+
+if( isset($_SESSION['user']) ){
+
+        header("Location: ". $home);
+        exit();
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,6 +27,9 @@
 		<label for="password">Contraseña:</label>
 		<input type="password" name="password">
 		</div>
+			<?php if(isset($errores)): ?>
+				<p style="color:red;">El usuario o contraseña no coinciden.</p>
+			<?php endif; ?>
 		<div>
 		<input type="submit" value="Entrar">
 		</div>
