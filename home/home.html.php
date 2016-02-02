@@ -6,7 +6,7 @@
 </head>
 <body>
 	<h1>Página de prácticas</h1>
-	<?php if (isset($_SESSION['user'])): ?> 
+	<?php if (isset($_SESSION['user_id'])): ?> 
 		<a href="<?=$home.'upload'?>">Subir práctica</a> - 
 		<a href="<?=$home.'logout'?>">Salir</a>
 	<?php else: ?>

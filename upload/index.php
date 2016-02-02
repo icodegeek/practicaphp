@@ -3,6 +3,8 @@
 require_once '../location/url.php';
 require_once '../db/connectdb.php';
 
+session_start();
+
 if (isset($_GET['upload'])) {
 	
 	$name = $_POST['name'];
